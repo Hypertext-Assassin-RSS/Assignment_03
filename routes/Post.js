@@ -22,6 +22,27 @@ router.post('/:id',async (req, res) => {
     }
 })
 
+router.get('/:id',async (req, res) => {
+    let allPosts = [];
+    try {
+        const posts = await Post.find()
+        for (let i = 0; i < posts.length; i++) {
+            if (posts[i].userId === req.params.id){
+                allPosts[i] = posts[i]
+            }
+        }
+        if (allPosts.length !== 0){
+            res.json(allPosts)
+            console.log(allPosts)
+        }else {
+            res.send('You have no post to show')
+        }
+
+    }catch (e) {
+        res.send('Error :' + e)
+    }
+})
+
 
 
 module.exports = router
