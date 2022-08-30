@@ -1,6 +1,8 @@
 const mongoose = require('mongoose')
 const express = require('express')
 
+const User = require('./routes/User')
+
 const app = express();
 const port = 4000;
 
@@ -13,6 +15,8 @@ const connection = mongoose.connection;
 connection.on('open', () => {
     console.log('MongoDB Connect...!')
 })
+
+app.use('/user',User)
 
 app.listen(port,() => {
     console.log('App start and listing :'+port)
