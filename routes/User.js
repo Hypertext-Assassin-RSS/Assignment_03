@@ -60,8 +60,17 @@ router.delete('/:id', async (req, res) => {
         const user = await User.findById(req.params.id);
         const response = await user.remove();
 
-        res.json({message: 'User ' + req.params.userId + ' account deleted', response: response})
+        res.json({message: 'User ' + req.params.id + ' account deleted', response: response})
     }catch (e) {
+        res.send('Error :' + e)
+    }
+})
+
+router.get('/:id',async (req, res) => {
+    try {
+        const response = await User.findById(req.params.id);
+        res.json({message: 'User ' + req.params.id + ' account details', response: response})
+    } catch (e) {
         res.send('Error :' + e)
     }
 })
