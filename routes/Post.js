@@ -70,5 +70,15 @@ router.delete('/:id',async (req, res) => {
 })
 
 
+router.get('/',async (req, res) => {
+    try {
+        const posts = await Post.find();
+        res.json({message: 'All posts ',result:posts})
+    }catch (e) {
+        res.send('Error :' + e)
+    }
+})
+
+
 
 module.exports = router
