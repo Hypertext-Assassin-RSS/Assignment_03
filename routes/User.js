@@ -55,4 +55,15 @@ router.put('/:id', async (req, res) => {
     }
 })
 
+router.delete('/:id', async (req, res) => {
+    try {
+        const user = await User.findById(req.params.id);
+        const response = await user.remove();
+
+        res.json({message: 'User ' + req.params.userId + ' account deleted', response: response})
+    }catch (e) {
+        res.send('Error :' + e)
+    }
+})
+
 module.exports = router
