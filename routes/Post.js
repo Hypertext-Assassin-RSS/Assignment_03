@@ -43,6 +43,22 @@ router.get('/:id',async (req, res) => {
     }
 })
 
+router.put('/:id',async (req, res) => {
+    try {
+       const post = await Post.findById(req.params.id)
+            post.userId = post.userId
+            post.date = req.body.date
+            post.time = req.body.time
+            post.title = req.body.title
+            post.body = req.body.body
+
+        const response = await  post.save();
+        res.json({message: 'Post  updated', response: response})
+    }catch (e) {
+        res.send('Error :' + e)
+    }
+})
+
 
 
 module.exports = router
